@@ -13,33 +13,44 @@
 
    <% if user_signed_in? %>
     
-      <body>
+      <body id="wrapper" style="background-color: white;">
+        <div id="header">
+          <%= render "layouts/header" %>
+        </div>
         
         <div class="container">
           <%= yield %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </div>
-
+        
+        <%= render "layouts/footer" %>
       </body>
       
     <% elsif admin_signed_in? %>
     
-      <body>
+      <body id="wrapper" style="background-color: #EEEEEE;">
+        <div id="header">
+          <%= render "layouts/header" %>
+        </div>
           
         <div class="container">
           <%= yield %>
         </div>
- 
+        
+        <%= render "layouts/footer" %>
       </body>
       
     <% else %>
     
-      <body>
+      <body id="wrapper" style="background=color: white;">
+        <div id="header">
+          <%= render "layouts/header" %>
+        </div>
         
         <div class="container">
           <%= yield %>
         </div>
         
+        <%= render "layouts/footer" %>
       </body>
       
     <% end %>

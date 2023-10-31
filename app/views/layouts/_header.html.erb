@@ -1,0 +1,90 @@
+<header class="sticky-top">
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="container">
+        <a href="https://dd395bbb0a2244cf9630f0e758761021.vfs.cloud9.ap-southeast-2.amazonaws.com/" class="navbar-brand">
+          <div="border p-2">
+            PETTER
+          </div>
+        </a>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" 
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    
+      <ul class="navbar-nav ml-auto">
+        
+        <% if user_signed_in? %>
+        
+          <li class="nav-item" style="margin-right:40px;">
+            ようこそ、<%= current_user.name %>さん!
+          </li>
+          
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "トップページ", root_path, style: "color:black;" %>
+          </li>
+          
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "投稿一覧", posts_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "いいね", favorites_path, style: "color:black;" %>
+          </li>
+          
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "コメント", comments_path, style: "color:black;" %>
+          </li>
+          
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "About", about_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, style: "color:black;" %>
+          </li>
+        
+        <% elsif admin_signed_in? %>
+       
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "About", about_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, style: "color:black;" %>
+          </li>
+          
+        <% else %>
+        
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "トップページ", root_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "新規登録", new_user_registration_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "ログイン", new_user_session_path, style: "color:black;" %>
+          </li>
+         
+          <li class="nav-item" style="margin-right:20px;">
+            <%= link_to "About", about_path, style: "color:black;" %>
+            </li>
+      
+          <li class="nav-item" style="margin-right:20px;"> 
+            <%= link_to "管理者ログイン", new_admin_session_path, style: "color:black;" %>
+          </li>
+          
+        <% end %>
+
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+</header>
