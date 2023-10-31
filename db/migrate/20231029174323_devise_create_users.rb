@@ -17,8 +17,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname, null: false
       t.string :introduction, null: false
       t.string :phone_number, null: false
-      t.boolern :is_deleted, null: false, default: ""
-      t.boolern :is_user_status, null: false, default: ""
+      t.boolean :is_deleted, null: false, default: ""
+      t.boolean :is_user_status, null: false, default: ""
       
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

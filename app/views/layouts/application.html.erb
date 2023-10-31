@@ -11,7 +11,37 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+   <% if user_signed_in? %>
+    
+      <body>
+        
+        <div class="container">
+          <%= yield %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </div>
+
+      </body>
+      
+    <% elsif admin_signed_in? %>
+    
+      <body>
+          
+        <div class="container">
+          <%= yield %>
+        </div>
+ 
+      </body>
+      
+    <% else %>
+    
+      <body>
+        
+        <div class="container">
+          <%= yield %>
+        </div>
+        
+      </body>
+      
+    <% end %>
+
 </html>

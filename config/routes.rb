@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :users, only:[:index, :show, :edit, :update]
+    get 'search' => 'searches#search'
+  end
+  
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
   
   devise_for :users, skip: [:passwords], controllers: {
@@ -15,7 +20,6 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about' => 'homes#about', as: 'about'
-  
   
   resource :users, only: [] do
     member do
