@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2023_10_30_155500) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "body", null: false
+    t.string "post_image", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -107,6 +108,8 @@ ActiveRecord::Schema.define(version: 2023_10_30_155500) do
     t.string "nickname", null: false
     t.string "introduction"
     t.string "phone_number", null: false
+    t.string "header_image", null: false
+    t.string "icon_image", null: false
     t.boolean "is_deleted", default: false, null: false
     t.boolean "is_user_status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
