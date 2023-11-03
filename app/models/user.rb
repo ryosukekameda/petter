@@ -3,17 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  has_one_attached :header_image
-  has_one_attached :icon_image
-  
-  has_many :post, dependent: :destroy
-  has_many :favorite, dependent: :destroy
-  has_many :comment, dependent: :destroy
-  has_many :followings_id, dependent: :destroy
-  has_many :followiners_id, dependent: :destroy
-end
-
+         
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -22,3 +12,31 @@ end
       user.is_deleted = false
     end
   end
+  
+  has_many :post, dependent: :destroy
+  has_many :favorite, dependent: :destroy
+  has_many :comment, dependent: :destroy
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_users, through: :followers, source: :followed
+  has_many :follower_users, through: :followeds, source: :follower
+  
+  has_one_attached :header_image
+  has_one_attached :icon_image
+  
+  def get_header_image(width, height)
+    unless header_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      header_image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
+    end
+      header_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  def get_icon_image(width, height)
+    unless icon_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      icon_image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
+    end
+      icon_image.variant(resize_to_limit: [width, height]).processed
+  end
+end

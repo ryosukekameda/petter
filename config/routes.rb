@@ -25,25 +25,21 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about', as: 'about'
   
-  resource :users, only: [] do
+  resources :users, only: [:show, :edit, :update] do
     member do
-      get 'account_id', action: :show
-      get 'account_id/edit', action: :edit
-      patch '', action: :update
       get 'unsubscribe'
       patch 'withdraw'
+      get :follows, :followers
     end
+      resource :relationships, only: [:create, :destroy]
   end
   
-    resources :posts, only: [:new, :show, :create, :destroy] 
+    resources :posts, only: [:new, :show, :create, :destroy] do
       resource :favorites, only: [:index, :create, :destroy] 
+    end
     resources :comments, only: [:create, :destroy] 
     resources :reports, only: [:new, :create] 
     resources :notifications, only: [:index, :destroy]
-    
-    resources :relationships, only: [:create, :destroy] 
-      get 'user_id/followings' => 'user_id#followings', as: 'user_id_followings'
-      get 'user_id/followers' => 'user_id#followers', as: 'user_id_followers'
   end
   
 end
