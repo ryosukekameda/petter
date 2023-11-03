@@ -7,6 +7,11 @@ class Post < ApplicationRecord
   
   belongs_to :user
   
+  def self.ransackable_attributes(auth_object = nil)
+     ["commnet", "favorite", "post_image_attachment", "post_image_blob", "post_tag", "user"]
+  end
+  # 上記変える
+  
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end

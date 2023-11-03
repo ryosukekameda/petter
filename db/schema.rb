@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(version: 2023_11_03_081032) do
     t.string "nickname", null: false
     t.string "introduction"
     t.string "phone_number", null: false
-    t.string "header_image", null: false
-    t.string "icon_image", null: false
+    t.string "header_image"
+    t.string "icon_image"
     t.boolean "is_deleted", default: false, null: false
     t.boolean "is_user_status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false

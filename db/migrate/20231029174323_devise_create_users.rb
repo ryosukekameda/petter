@@ -17,8 +17,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname, null: false
       t.string :introduction
       t.string :phone_number, null: false
-      t.string :header_image, null: false
-      t.string :icon_image, null: false
+      t.string :header_image
+      t.string :icon_image
       t.boolean :is_deleted, null: false, default: false
       t.boolean :is_user_status, null: false, default: false
       
