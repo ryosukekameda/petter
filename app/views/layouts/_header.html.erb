@@ -44,8 +44,8 @@
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, style: "color:black;" %>
           </li>
           
-          <%= render "layouts/search" %>
-        
+            <%= render "layouts/search" %>
+         
         <% elsif admin_signed_in? %>
        
           <li class="nav-item" style="margin-right:20px;">

@@ -24,6 +24,22 @@ class User < ApplicationRecord
   has_one_attached :header_image
   has_one_attached :icon_image
   
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+
+  
   def get_header_image(width, height)
     unless header_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

@@ -7,10 +7,21 @@ class Post < ApplicationRecord
   
   belongs_to :user
   
-  def self.ransackable_attributes(auth_object = nil)
-     ["commnet", "favorite", "post_image_attachment", "post_image_blob", "post_tag", "user"]
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("body LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("body LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("body LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("body LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
   end
-  # 上記変える
+
   
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
