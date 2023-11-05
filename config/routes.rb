@@ -35,10 +35,10 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
   end
   
-    resources :posts, only: [:new, :show, :create, :destroy] do
+    resources :posts, only: [:new, :index, :show, :create, :destroy] do
       resource :favorites, only: [:index, :create, :destroy] 
+      resources :comments, only: [:create, :destroy]
     end
-    resources :comments, only: [:create, :destroy] 
     resources :reports, only: [:new, :create] 
     resources :notifications, only: [:index, :destroy]
   end

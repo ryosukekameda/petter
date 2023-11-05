@@ -1,6 +1,10 @@
+<% flash.each do |key, message| %>
+  <div class="flash <%= key %>"><%= message %></div>
+<% end %>
+
 <h1>新規投稿</h1>
 
-<%= form_with model: @post, url: posts_path, local:true do |f| %>
+<%= form_with model: @post, url: posts_path, method: :post, local:true do |f| %>
 
   <h4>画像</h4>
   <%= f.file_field :post_image, accept: "image/*" %>

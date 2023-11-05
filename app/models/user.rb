@@ -13,9 +13,9 @@ class User < ApplicationRecord
     end
   end
   
-  has_many :post, dependent: :destroy
-  has_many :favorite, dependent: :destroy
-  has_many :comment, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_users, through: :followers, source: :followed

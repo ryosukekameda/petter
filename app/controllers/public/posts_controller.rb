@@ -1,18 +1,25 @@
 class Public::PostsController < ApplicationController
+  def index
+  end
+  
   def new
     @post = Post.new
   end
   
   def create
-    post = Post.new(post_params)
-    post.save
-    redirect_to root_path
-  end
-  
-  def index
+    @post = Post.new(post_params)
+    @post.user = current_user
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      flash.now[:alert] = @post.errors.full_messages
+      render :new
+    end
   end
 
   def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def destroy
@@ -21,6 +28,6 @@ class Public::PostsController < ApplicationController
   private
   
   def post_params
-    params.require(:post).permit(:post_image, :body)
+    params.require(:post).permit(:body, :post_image)
   end
 end

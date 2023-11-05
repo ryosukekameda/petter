@@ -1,2 +1,3 @@
 <td>フォロー<%= user.followers.count %></td>
 <td>フォロワー<%= user.followeds.count %></td>
+<p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>

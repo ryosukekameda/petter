@@ -1,9 +1,12 @@
 class Post < ApplicationRecord
   has_one_attached :post_image
   
-  has_many :favorite, dependent: :destroy
-  has_many :commnet, dependent: :destroy
-  has_many :post_tag, dependent: :destroy
+  validates :body, presence: true
+  validates :post_image, presence: true
+  
+  has_many :favorites, dependent: :destroy
+  has_many :commnets, dependent: :destroy
+  has_many :post_tags, dependent: :destroy
   
   belongs_to :user
   
