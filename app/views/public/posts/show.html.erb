@@ -1,27 +1,49 @@
-<h2>画像</h2>
-<p><%= image_tag @post.get_post_image(400, 400) %></p>
-
-<h2>本文</h2>
-<p><%= @post.body %></p>
-
-<div>
-  <p>コメント件数:<%= @post.comments.count %></p>
-  <% @post.comments.each do |comment| %>
-    <div>>
-      <p><%= image_tag comment.user.get_icon_image(100, 100) %></p>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %>
-      <%= comment.comment %>
-      <% if comment.user == current_user %>
-        <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+<div class="row">
+  <div class="col-10">
+    <h2>投稿詳細</h2>
+    
+    <table class="table">
+      <tr>
+        <td>
+          <%= link_to @post.user do %>
+            <%= image_tag @post.get_post_image(300, 300) %><br>
+            <%= @post.user.name %>
+          <% end %>
+        </td>
+        <td><%= @post.body %></td>
+        <td><%= render "public/favorites/btn", post: @post %></td>
+      </tr>
+    </table>
+    
+    <table class="table">
+      <tr>
+        <td><%= @post.comments.count %>
+          <% @post.comments.each do |comment| %>
+            <%= image_tag comment.user.get_icon_image(100, 100) %>
+            <%= comment.user.name %>
+            <%= comment.created_at.strftime('%Y/%m/%d') %>
+            <% if comment.user == current_user %>
+              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    
+    <table class="table">
+      <tr>
+        <td>
+          <%= form_with model: [@post, @comment] do |f| %>
+            <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    
+    <% if @post.user == current_user %>
+      <td><%= link_to "Edit", edit_post_path(@post), class: "btn btn-success" %></td>
+      <td><%= link_to "Destroy", @post, method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-danger" %></td>
+    <% end %>
+  </div>
 </div>
