@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: 'about'
     get 'search' => 'searches#search'
   
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update] do
     member do
       get 'unsubscribe'
       patch 'withdraw'

@@ -1,10 +1,15 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   
+  def index
+    @users = User.page(params[:page]).per(3).reverse_order
+  end
+  
   def show
-    @user = current_user
-    @followings_user = @user.followings_users
-    @follower_user = @user.follower_users
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page]).reverse_order
+    @followings = @user.following_users
+    @follower = @user.follower_users
   end
 
   def edit

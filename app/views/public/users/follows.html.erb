@@ -15,7 +15,7 @@
         <tr>
           <td>
             <%= link_to user_path(user) do %>
-              <%= image_tag user.icon_image(50, 50) %>
+              <%= image_tag user.get_icon_image(50, 50) %>
             <% end %>
           </td>
           <td>
@@ -27,6 +27,7 @@
             <% end %> 
           </td>
         </tr>
+      <% end %>
     </tbody>
     
   </table>

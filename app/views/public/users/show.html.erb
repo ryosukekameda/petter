@@ -1,3 +1,24 @@
-<td>フォロー<%= user.followers.count %></td>
-<td>フォロワー<%= user.followeds.count %></td>
-<p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
+
+    <div class="row justify-content-center">
+      <% if user_signed_in? && @user == current_user %>
+      <h1 class="font-weight-normal mt-5 mb-5">マイページ</h1>
+      <% else %>
+      <h1 class="font-weight-normal mt-5 mb-5"><%= @user.name %>さんのページ</h1>
+      <% end %>
+    </div>
+    
+    <div class="row justify-content-center">
+      <% @posts.each do |post| %>
+      <div class="one-post">
+        <%= link_to post_path(post) do %>
+        <%= image_tag post.get_post_image(100, 100) %>
+        <p class="caption mb-0"><%= post.body %></p>
+        <p class="caption"><%= link_to "#{post.comments.count} コメント", post_path(post.id) %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <%= paginate @posts %>
+
+<p>フォロー<%= @user.followers.count %></p>
+<p>フォロワー<%= @user.followeds.count %></p>
