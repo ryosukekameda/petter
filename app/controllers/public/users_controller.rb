@@ -19,7 +19,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to users_path
+      redirect_to user_path(@user.id)
     else
       render edit_users_path
     end

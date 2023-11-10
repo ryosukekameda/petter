@@ -55,4 +55,9 @@ class User < ApplicationRecord
     end
       icon_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  # 特定のユーザーがこのユーザーをフォローしているかどうかを確認
+  def following?(other_user)
+    self.following_users.include?(other_user)
+  end
 end
