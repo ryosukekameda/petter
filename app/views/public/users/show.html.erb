@@ -7,29 +7,67 @@
       <% end %>
     </div>
     
+    <p>フォロー<%= @user.followers.count %></p>
+    <p>フォロワー<%= @user.followeds.count %></p>
+
     <% if user_signed_in? && @user == current_user %>
       <p class="d-flex justify-content-end">
         <%= link_to "Edit", edit_user_path(@user), class: "btn btn-success" %>
       </p>
     <% end %>
-    <div class="d-flex">
-      <%= image_tag @user.get_header_image(300, 600) %><br>
-      <%= image_tag @user.get_icon_image(100, 100) %><br>
-      <h4><%= @user.introduction %></h4>
-    </div>
     
-    <div class="row justify-content-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Header Image</th>
+          <th>Icon Image</th>
+          <th>Introduction</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr>
+          <td>
+            <%= image_tag @user.get_header_image(600, 600) %><br>
+          </td>
+          <td>
+            <%= image_tag @user.get_icon_image(100, 100) %><br>
+          </td>
+          <td>
+            <%= @user.introduction %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Body</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      
+      <tbody>
       <% @posts.each do |post| %>
-      <div class="one-post">
-        <%= link_to post_path(post) do %>
-        <%= image_tag post.get_post_image(100, 100) %>
-        <p class="caption mb-0"><%= post.body %></p>
-        <p class="caption"><%= link_to "#{post.comments.count} コメント", post_path(post.id) %>
-        <% end %>
-      </div>
+        <tr>
+          <td>
+            <%= link_to post_path(post) do %>
+              <%= image_tag post.get_post_image(100, 100) %>
+            <% end %>
+          </td>
+          <td>
+            <%= post.body %>
+          </td>
+          <td>
+            <%= "#{post.comments.count} コメント" %>
+          </td>
+        </tr>
       <% end %>
-    </div>
-    <%= paginate @posts %>
+      </tbody>
+    </table>
+    
+    <%= paginate @posts %>  
 
-<p>フォロー<%= @user.followers.count %></p>
-<p>フォロワー<%= @user.followeds.count %></p>
+

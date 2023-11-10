@@ -37,19 +37,27 @@
           </li>
           
           <li class="nav-item" style="margin-right:20px;">
-            <%= link_to "新規投稿", new_post_path, style: "color:black;" %>
+            <%= link_to new_post_path, style: "color:black;" do %>
+              <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            <% end %>
           </li>
           
           <li class="nav-item" style="margin-right:20px;">
-            <%= link_to "投稿一覧", posts_path, style: "color:black;" %>
+            <%= link_to posts_path, style: "color:black;" do %>
+              <i class="fa-solid fa-paste" aria-hidden="true"></i>
+            <% end %>
           </li>
           
           <li class="nav-item" style="margin-right:20px;">
-            <%= link_to "いいね一覧", favorites_user_path(current_user), style: "color:black;" %>
+            <%= link_to favorites_user_path(current_user), style: "color:black;" do %>
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <% end %>
           </li>
           
           <li class="nav-item" style="margin-right:20px;">
-            <%= link_to "About", about_path, style: "color:black;" %>
+            <%= link_to about_path, style: "color:black;" do %>
+              <i class="fa-solid fa-link" aria-hidden="true"></i>
+            <% end %>
           </li>
          
           <li class="nav-item" style="margin-right:20px;">
