@@ -1,14 +1,37 @@
 class Post < ApplicationRecord
+  belongs_to :user
+  
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
+  
   has_one_attached :post_image
   
   validates :body, presence: true
   validates :post_image, presence: true
   
-  has_many :favorites, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :post_tags, dependent: :destroy
-  
-  belongs_to :user
+  def save_tags(tag_ids)
+  # タグIDがnilの場合（チェックボックスが選択されなかった場合）、
+  # 関連付けられているタグを全て削除します。
+    return tags.clear if tag_ids.nil?
+
+    current_tags = tags.pluck(:id)
+    new_tags = tag_ids.map(&:to_i) - current_tags
+    old_tags = current_tags - tag_ids.map(&:to_i)
+
+    old_tags.each do |old_tag_id|
+      tags.delete(Tag.find(old_tag_id))
+    end
+
+    new_tags.each do |new_tag_id|
+      tag = Tag.find(new_tag_id)
+      tags << tag unless tags.include?(tag)
+    end
+  end
+
+
+
   
   # 検索方法分岐
   def self.looks(search, word)
@@ -24,7 +47,6 @@ class Post < ApplicationRecord
       @post = Post.all
     end
   end
-
   
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

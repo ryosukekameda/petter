@@ -15,6 +15,12 @@
       </tr>
     </table>
     
+    <table  class="table">
+      <% @post_tags.each do |tag| %>
+        <%=tag.name%><%="(#{tag.posts.count})" %>
+      <% end %>
+    </table>
+    
     <table class="table">
       <tr>
         <td><%= @post.comments.count %>

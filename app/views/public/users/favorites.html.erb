@@ -1,0 +1,10 @@
+<table class="table">
+  <tbody>
+    <% @favorite_posts.each do |post| %>
+      <tr>
+        <td><%= link_to image_tag @post.get_post_image(100, 100), post_path(@post) %></td>
+        <td><%= post.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

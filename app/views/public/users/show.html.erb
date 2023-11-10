@@ -7,6 +7,17 @@
       <% end %>
     </div>
     
+    <% if user_signed_in? && @user == current_user %>
+      <p class="d-flex justify-content-end">
+        <%= link_to "Edit", edit_user_path(@user), class: "btn btn-success" %>
+      </p>
+    <% end %>
+    <div class="d-flex">
+      <%= image_tag @user.get_header_image(300, 600) %><br>
+      <%= image_tag @user.get_icon_image(100, 100) %><br>
+      <h4><%= @user.introduction %></h4>
+    </div>
+    
     <div class="row justify-content-center">
       <% @posts.each do |post| %>
       <div class="one-post">
