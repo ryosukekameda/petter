@@ -7,8 +7,12 @@
       <% end %>
     </div>
     
-    <p>フォロー<%= @user.followers.count %></p>
-    <p>フォロワー<%= @user.followeds.count %></p>
+  　   <p>フォロー<%= @user.followers.count %></p>
+      <p>フォロワー<%= @user.followeds.count %></p>
+    <% unless user_signed_in? && @user == current_user %>
+      <p><%= render partial: "/public/relationships/follow_btn", locals: { user: @user } %></p>
+    <% end %>
+
 
     <% if user_signed_in? && @user == current_user %>
       <p class="d-flex justify-content-end">

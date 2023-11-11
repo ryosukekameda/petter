@@ -60,4 +60,14 @@ class User < ApplicationRecord
   def following?(other_user)
     self.following_users.include?(other_user)
   end
+  
+  # 他のユーザーをフォロー
+  def follow(other_user_id)
+    followers.create(followed_id: other_user_id)
+  end
+
+  # フォローを解除
+  def unfollow(other_user_id)
+    followers.find_by(followed_id: other_user_id).destroy
+  end
 end
