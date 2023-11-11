@@ -2,13 +2,15 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
-        <a href="https://dd395bbb0a2244cf9630f0e758761021.vfs.cloud9.ap-southeast-2.amazonaws.com/" class="navbar-brand">
-          <div="border p-2">
-            PETTER
+        <div class="row-100">
+          <div class="col-4">
+            <a href="https://dd395bbb0a2244cf9630f0e758761021.vfs.cloud9.ap-southeast-2.amazonaws.com/" class="navbar-brand">
+              <div="border p-2">
+                PETTER
+              </div>
+            </a>
           </div>
-        </a>
-    
-    
+    <div class="col-8 text-right">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" 
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -45,12 +47,6 @@
           <li class="nav-item" style="margin-right:20px;">
             <%= link_to new_post_path, style: "color:black;" do %>
               <i class="fa-solid fa-plus" aria-hidden="true"></i>
-            <% end %>
-          </li>
-          
-          <li class="nav-item" style="margin-right:20px;">
-            <%= link_to posts_path, style: "color:black;" do %>
-              <i class="fa-solid fa-paste" aria-hidden="true"></i>
             <% end %>
           </li>
           
@@ -110,7 +106,8 @@
 
         </ul>
       </div>
-      
+      </div>
+      </div>
     </div>
   </nav>
 </header>
