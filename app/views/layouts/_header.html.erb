@@ -39,8 +39,10 @@
           </li>
           
           <li class="nav-item" style="margin-right:20px;">
-            <%= link_to user_path(@user.id), style: "color:black;" do %>
-              <i class="fa-solid fa-user" aria-hidden="true"></i>
+            <% if @user.present? %>
+              <%= link_to user_path(@user.id), style: "color:black;" do %>
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+              <% end %>
             <% end %>
           </li>
           
@@ -87,11 +89,7 @@
           <li class="nav-item" style="margin-right:20px;">
             <%= link_to "About", about_path, style: "color:black;" %>
             </li>
-      
-          <li class="nav-item" style="margin-right:20px;"> 
-            <%= link_to "管理者ログイン", new_admin_session_path, style: "color:black;" %>
-          </li>
-          
+            
         <% end %>
 
         </ul>
